@@ -52,12 +52,9 @@ const items: MenuItem[] = [
   getMenu("Users", "sub1", <UserOutlined />, [
     getItem("User", "3", "/user"),
     getItem("Role", "4", "/role"),
-    getItem("Alex", "5", "/permission"),
   ]),
   getMenu("Ecommerce", "sub2", <ShoppingOutlined />, [
     getItem("Products", "6", "/products"),
-    getItem("Role", "4", "/role"),
-    getItem("Alex", "5", "/permission"),
   ]),
 ];
 
