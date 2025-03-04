@@ -159,7 +159,7 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }}>
-          Ant Design ©{new Date().getFullYear()} Created by Ant UED
+          polygontech ©{new Date().getFullYear()} Created by Al Anas
         </Footer>
       </Layout>
     </Layout>
