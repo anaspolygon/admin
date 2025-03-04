@@ -1,0 +1,44 @@
+services:
+  db:
+    image: mysql:latest
+    container_name: universal_admin-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root}
+      MYSQL_USER: ${DB_USER:-admin}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-admin}
+      MYSQL_DATABASE: ${DB_NAME:-universal_admin_db}
+    ports:
+      - "${DB_PUBLISHED_PORT:-3306}:3306"
+    volumes:
+      - universal_admin-db:/var/lib/mysql
+    networks:
+      - universal_admin
+
+  universal_admin:
+    container_name: universal_admin
+    image: universal_admin:latest
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    build:
+      dockerfile: docker/local.Dockerfile
+      context: ../../
+    ports:
+      - 4015:3000
+    volumes:
+      - ../../:/app
+      - /app/node_modules
+    environment:
+      VIRTUAL_HOST: ${WEB_VIRTUAL_HOST:-universal_admin.local}
+      DATABASE_URL: "mysql://${DB_USER:-admin}:${DB_PASSWORD:-admin}@universal_admin-db:${DB_PUBLISHED_PORT:-3306}/${DB_NAME:-universal_admin_db}"
+    networks:
+      - universal_admin
+
+networks:
+  universal_admin:
+    name: universal_admin
+
+volumes:
+  universal_admin-db:
+    driver: local
