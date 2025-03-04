@@ -11,7 +11,6 @@ import {
 import type { MenuProps } from "antd";
 import { Breadcrumb, Layout, Menu, theme, Button, Dropdown, Avatar } from "antd";
 import Link from "next/link";
-// import router from "next/navigation";
 import { useRouter } from "next/navigation";
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -65,9 +64,6 @@ const items: MenuItem[] = [
 interface Props {
   children: ReactNode;
 }
-
-
-
 
 const DashboardLayout: React.FC<Props> = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
@@ -129,7 +125,7 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
         />
       </Sider>
       <Layout>
-        <Header className="flex justify-between" style={{ padding: 0, background: colorBgContainer }}>
+        <Header className="flex justify-between items-center" style={{ padding: 0, background: colorBgContainer }}>
           <Button
             type="text"
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -141,14 +137,12 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
             }}
           />
           <div className="pr-10">
-
             <Dropdown menu={{ items: menuItems }} placement="bottomRight">
               <div className="flex items-center gap-2">
                 <Avatar size="large" icon={<UserOutlined />} />
-                <p>{user?.name}</p>
+                <p>{user?.name ?? "Mr.Tom"}</p>
               </div>
             </Dropdown>
-
           </div>
         </Header>
         <Content style={{ margin: "0 16px" }}>
