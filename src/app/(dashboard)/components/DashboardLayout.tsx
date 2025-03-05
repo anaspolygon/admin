@@ -123,9 +123,27 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
         <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline" items={items} />
       </Sider>
 
-      {/* Main Content Layout */}
+      {/* Main Content Layout with Fixed Header */}
       <Layout style={{ marginLeft: collapsed ? 80 : 300, transition: "margin-left 0.2s" }}>
-        <Header className="flex justify-between items-center" style={{ padding: 0, background: colorBgContainer }}>
+        
+        {/* Fixed Header */}
+        <Header
+          className="flex justify-between items-center"
+          style={{
+            position: "fixed",
+            top: 0,
+            left: collapsed ? 80 : 300,
+            right: 0,
+            height: 64,
+            background: colorBgContainer,
+            zIndex: 1000,
+            // display: "flex",
+            // alignItems: "center",
+            // justifyContent: "space-between",
+            padding: "0 16px",
+            transition: "left 0.2s",
+          }}
+        >
           <Button
             type="text"
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -146,12 +164,14 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
           </div>
         </Header>
 
-        {/* Scrollable Content */}
+        {/* Scrollable Content (adjusted for fixed header) */}
         <Content
           style={{
-            margin: "16px",
+            marginTop: 80, // Adjust for fixed header
+            marginLeft: 16,
+            marginRight: 16,
             padding: 24,
-            minHeight: "100vh",
+            minHeight: "calc(100vh - 128px)", // Adjust to fit content below header
             background: colorBgContainer,
             borderRadius: borderRadiusLG,
             overflow: "auto",
@@ -165,7 +185,7 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
         </Content>
 
         {/* Footer */}
-        <Footer style={{ textAlign: "center" }}>
+        <Footer style={{ textAlign: "center", marginLeft: collapsed ? 80 : 300, transition: "margin-left 0.2s" }}>
           polygontech ©{new Date().getFullYear()} Created by Al Anas
         </Footer>
       </Layout>
