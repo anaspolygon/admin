@@ -6,7 +6,6 @@ import {
   MenuUnfoldOutlined,
   ShoppingOutlined,
   LoginOutlined
-
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Breadcrumb, Layout, Menu, theme, Button, Dropdown, Avatar } from "antd";
@@ -47,8 +46,6 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  //   getItem("Option 1", "1", <PieChartOutlined />),
-  //   getItem("Option 2", "2", <DesktopOutlined />),
   getMenu("Users", "sub1", <UserOutlined />, [
     getItem("User", "3", "/user"),
     getItem("Role", "4", "/role"),
@@ -89,14 +86,13 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
     } catch (error) {
       console.log(error);
     }
-  }
-  
+  };
 
   const menuItems: MenuProps['items'] = [
     {
       key: '3',
       label: (
-        <button onClick={()=> logOut()} className="text-red-500 flex items-center gap-2" type="button">
+        <button onClick={() => logOut()} className="text-red-500 flex items-center gap-2" type="button">
           <LoginOutlined />
           <span>Log out</span>
         </button>
@@ -108,21 +104,27 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
+      {/* Fixed Sidebar */}
       <Sider
         collapsible
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
         width={300}
+        style={{
+          height: "100vh",
+          position: "fixed",
+          left: 0,
+          top: 0,
+          bottom: 0,
+          zIndex: 1000,
+        }}
       >
         <div className="demo-logo-vertical" />
-        <Menu
-          theme="dark"
-          defaultSelectedKeys={["1"]}
-          mode="inline"
-          items={items}
-        />
+        <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline" items={items} />
       </Sider>
-      <Layout>
+
+      {/* Main Content Layout */}
+      <Layout style={{ marginLeft: collapsed ? 80 : 300, transition: "margin-left 0.2s" }}>
         <Header className="flex justify-between items-center" style={{ padding: 0, background: colorBgContainer }}>
           <Button
             type="text"
@@ -143,22 +145,26 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
             </Dropdown>
           </div>
         </Header>
-        <Content style={{ margin: "0 16px" }}>
-          <Breadcrumb style={{ margin: "16px 0" }}>
+
+        {/* Scrollable Content */}
+        <Content
+          style={{
+            margin: "16px",
+            padding: 24,
+            minHeight: "100vh",
+            background: colorBgContainer,
+            borderRadius: borderRadiusLG,
+            overflow: "auto",
+          }}
+        >
+          <Breadcrumb style={{ marginBottom: "16px" }}>
             <Breadcrumb.Item>User</Breadcrumb.Item>
             <Breadcrumb.Item>Bill</Breadcrumb.Item>
           </Breadcrumb>
-          <div
-            style={{
-              padding: 24,
-              minHeight: 360,
-              background: colorBgContainer,
-              borderRadius: borderRadiusLG,
-            }}
-          >
-            {children}
-          </div>
+          {children}
         </Content>
+
+        {/* Footer */}
         <Footer style={{ textAlign: "center" }}>
           polygontech ©{new Date().getFullYear()} Created by Al Anas
         </Footer>
