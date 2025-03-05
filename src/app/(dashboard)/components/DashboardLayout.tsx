@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import React, { ReactNode, useState } from "react";
 import {
   UserOutlined,
@@ -102,6 +102,12 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
 
   const user = localStorage?.getItem("user") ? JSON.parse(localStorage.getItem("user") as string) : null;
 
+  // Define Breadcrumb Items as an array of objects
+  const breadcrumbItems = [
+    { title: "User" },
+    { title: "Bill" },
+  ];
+
   return (
     <Layout style={{ minHeight: "100vh" }}>
       {/* Fixed Sidebar */}
@@ -137,9 +143,9 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
             height: 64,
             background: colorBgContainer,
             zIndex: 1000,
-            // display: "flex",
-            // alignItems: "center",
-            // justifyContent: "space-between",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
             padding: "0 16px",
             transition: "left 0.2s",
           }}
@@ -177,10 +183,9 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
             overflow: "auto",
           }}
         >
-          <Breadcrumb style={{ marginBottom: "16px" }}>
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
-          </Breadcrumb>
+          {/* Updated Breadcrumb with `items` prop */}
+          <Breadcrumb items={breadcrumbItems} style={{ marginBottom: "16px" }} />
+
           {children}
         </Content>
 

@@ -35,6 +35,7 @@ const RolePage = () => {
         <h2 className="my-4 font-bold">Role Permissions</h2>
         {Array.from("1").map((_, index) => (
           <div
+            key={`m_${index}`}
             className={`flex items-center gap-5  ${
               index === 0 ? "border-y" : "border-b"
             } py-3`}

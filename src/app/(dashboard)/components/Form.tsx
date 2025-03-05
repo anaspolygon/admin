@@ -1,5 +1,5 @@
-"use client"
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { Form, Input, InputNumber, Select, DatePicker, Switch, Checkbox, Radio, Slider, Rate, Upload, Button } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 
@@ -7,9 +7,19 @@ const { Option } = Select;
 
 const AntDesignAllForms: React.FC = () => {
   const [form] = Form.useForm();
+  const [fileList, setFileList] = useState<any[]>([]);  // Manage file list state
 
   const onFinish = (values: any) => {
     console.log("Form Values:", values);
+  };
+
+  // Handle file change (for file upload)
+  const handleChange = (info: any) => {
+    if (info.fileList.length === 0) {
+      setFileList([]);
+    } else {
+      setFileList(info.fileList);
+    }
   };
 
   return (
@@ -84,14 +94,17 @@ const AntDesignAllForms: React.FC = () => {
 
       {/* File Upload */}
       <Form.Item label="Upload Profile Picture" name="upload">
-        <Upload>
-          <Button  size="large" icon={<UploadOutlined />}>Click to Upload</Button>
+        <Upload
+          fileList={fileList}  // Use fileList to manage files
+          onChange={handleChange}  // Handle file changes
+        >
+          <Button size="large" icon={<UploadOutlined />}>Click to Upload</Button>
         </Upload>
       </Form.Item>
 
       {/* Submit Button */}
       <Form.Item>
-        <Button  size="large" type="primary" htmlType="submit">
+        <Button size="large" type="primary" htmlType="submit">
           Submit
         </Button>
       </Form.Item>
