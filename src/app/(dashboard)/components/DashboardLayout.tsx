@@ -55,6 +55,7 @@ const items: MenuItem[] = [
   ]),
   getMenu("Ecommerce", "sub2", <ShoppingOutlined />, [
     getItem("Products", "6", "/products"),
+    getItem("Add Product", "7", "/add-product"),
   ]),
 ];
 
