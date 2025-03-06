@@ -67,9 +67,9 @@ const LoginForm = () => {
   console.log(emailError,passwordError);
   
   return (
-    <div className="w-[500px]">
+    <div className="w-[352px] h-[380px]">
       <Card className="shadow-lg">
-        <Title level={2}>Login</Title>
+        <Title  style={{fontSize:18,marginBottom:20}}>Login</Title>
         <Input onChange={(e) => {
           setEmail(e.target.value); 
           setEmailError("")}
@@ -88,10 +88,10 @@ const LoginForm = () => {
         >
           Log in
         </Button>
-        <div className="flex justify-between mt-4">
-          <Link href="/signup">Create An Account</Link>
-          <Link className="text-black" href="/forgot-password">
-            Forgot your password?
+        <div className="flex justify-between mt-2">
+          {/* <Link href="/signup">Create An Account</Link> */}
+          <Link  href="/forgot-password">
+            Forgot Pwd?
           </Link>
         </div>
       </Card>
