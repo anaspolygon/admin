@@ -11,6 +11,7 @@ import type { MenuProps } from "antd";
 import { Breadcrumb, Layout, Menu, theme, Button, Dropdown, Avatar } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -115,7 +116,7 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
         collapsible
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
-        width={300}
+        width={260}
         style={{
           height: "100vh",
           position: "fixed",
@@ -130,7 +131,7 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
       </Sider>
 
       {/* Main Content Layout with Fixed Header */}
-      <Layout style={{ marginLeft: collapsed ? 80 : 300, transition: "margin-left 0.2s" }}>
+      <Layout style={{ marginLeft: collapsed ? 80 : 260, transition: "margin-left 0.2s" }}>
         
         {/* Fixed Header */}
         <Header
@@ -138,7 +139,7 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
           style={{
             position: "fixed",
             top: 0,
-            left: collapsed ? 80 : 300,
+            left: collapsed ? 80 : 260,
             right: 0,
             height: 64,
             background: colorBgContainer,
@@ -190,7 +191,7 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
         </Content>
 
         {/* Footer */}
-        <Footer style={{ textAlign: "center", marginLeft: collapsed ? 80 : 300, transition: "margin-left 0.2s" }}>
+        <Footer style={{ textAlign: "center",  transition: "margin-left 0.2s" }}>
           polygontech ©{new Date().getFullYear()} Created by Al Anas
         </Footer>
       </Layout>
