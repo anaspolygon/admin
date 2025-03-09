@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { ReactNode, useState } from "react";
 import {
   UserOutlined,
@@ -6,10 +6,18 @@ import {
   MenuUnfoldOutlined,
   ShoppingOutlined,
   LoginOutlined,
-  SettingOutlined 
+  SettingOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import { Breadcrumb, Layout, Menu, theme, Button, Dropdown, Avatar } from "antd";
+import {
+  Breadcrumb,
+  Layout,
+  Menu,
+  theme,
+  Button,
+  Dropdown,
+  Avatar,
+} from "antd";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -75,9 +83,9 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
       });
-  
+
       const data = await res.json();
-  
+
       if (res.ok) {
         console.log(data);
         localStorage.removeItem("user");
@@ -90,51 +98,52 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
     }
   };
 
-  const menuItems: MenuProps['items'] = [
+  const menuItems: MenuProps["items"] = [
     {
-      key: '1',
+      key: "1",
       label: (
-        <button  className="flex items-center gap-2" type="button">
+        <button className="flex items-center gap-2" type="button">
           <UserOutlined />
           <span>My Profile</span>
         </button>
       ),
     },
     {
-      key: '2',
+      key: "2",
       label: (
-        <button  className="flex items-center gap-2" type="button">
+        <button className="flex items-center gap-2" type="button">
           <SettingOutlined />
           <span>Settings</span>
         </button>
       ),
     },
     {
-      key: '3',
+      key: "3",
       label: (
-        <button onClick={() => logOut()} className="text-red-500 flex items-center gap-2" type="button">
+        <button
+          onClick={() => logOut()}
+          className="text-red-500 flex items-center gap-2"
+          type="button"
+        >
           <LoginOutlined />
           <span>Log out</span>
         </button>
       ),
     },
-   
-   
   ];
 
-  const user = localStorage?.getItem("user") ? JSON.parse(localStorage.getItem("user") as string) : null;
+  const user = localStorage?.getItem("user")
+    ? JSON.parse(localStorage.getItem("user") as string)
+    : null;
 
   // Define Breadcrumb Items as an array of objects
-  const breadcrumbItems = [
-    { title: "User" },
-    { title: "Bill" },
-  ];
+  const breadcrumbItems = [{ title: "User" }, { title: "Bill" }];
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
       {/* Fixed Sidebar */}
       <Sider
-      theme="light"
+        theme="light"
         collapsible
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
@@ -149,12 +158,33 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
         }}
       >
         <div className="demo-logo-vertical" />
-        <Menu theme="light" defaultSelectedKeys={["1"]} mode="inline" items={items} />
+        {collapsed ? (
+          <div className="pl-6 mt-2 mb-6">
+            <Image src="/admin_logo_1.svg" alt="" width={43} height={28} />
+          </div>
+        ) : (
+          <div className="flex items-center pl-6 gap-2 mt-4 mb-6">
+            <Image src="/admin_logo_1.svg" alt="" width={43} height={28} />{" "}
+            <Image src="/admin_logo_2.svg" alt="" width={80} height={19} />
+          </div>
+        )}
+        {/* <Image src="/admin_logo_1" alt="" width={43} height={28}/>
+        <Image src="/admin_logo_1" alt="" width={80} height={19}/> */}
+        <Menu
+          theme="light"
+          defaultSelectedKeys={["1"]}
+          mode="inline"
+          items={items}
+        />
       </Sider>
 
       {/* Main Content Layout with Fixed Header */}
-      <Layout style={{ marginLeft: collapsed ? 80 : 260, transition: "margin-left 0.2s" }}>
-        
+      <Layout
+        style={{
+          marginLeft: collapsed ? 80 : 260,
+          transition: "margin-left 0.2s",
+        }}
+      >
         {/* Fixed Header */}
         <Header
           className="flex justify-between items-center"
@@ -171,12 +201,18 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
             justifyContent: "space-between",
             padding: "0 16px",
             transition: "left 0.2s",
-            background: "#2A62FF"
+            background: "#2A62FF",
           }}
         >
           <Button
             type="text"
-            icon={collapsed ? <MenuUnfoldOutlined className="text-white" /> : <MenuFoldOutlined className="text-white" />}
+            icon={
+              collapsed ? (
+                <MenuUnfoldOutlined className="text-white" />
+              ) : (
+                <MenuFoldOutlined className="text-white" />
+              )
+            }
             onClick={() => setCollapsed(!collapsed)}
             style={{
               fontSize: "16px",
@@ -189,7 +225,7 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
               <div className="flex items-center gap-2">
                 {/* <Avatar size="large" icon={<UserOutlined />} /> */}
                 <button>
-                   <Image
+                  <Image
                     src="/user.jpg"
                     alt="avatar"
                     width={40}
@@ -217,13 +253,16 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
           }}
         >
           {/* Updated Breadcrumb with `items` prop */}
-          <Breadcrumb items={breadcrumbItems} style={{ marginBottom: "16px" }} />
+          <Breadcrumb
+            items={breadcrumbItems}
+            style={{ marginBottom: "16px" }}
+          />
 
           {children}
         </Content>
 
         {/* Footer */}
-        <Footer style={{ textAlign: "center",  transition: "margin-left 0.2s" }}>
+        <Footer style={{ textAlign: "center", transition: "margin-left 0.2s" }}>
           polygontech ©{new Date().getFullYear()} Created by Al Anas
         </Footer>
       </Layout>
