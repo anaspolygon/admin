@@ -5,7 +5,8 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   ShoppingOutlined,
-  LoginOutlined
+  LoginOutlined,
+  SettingOutlined 
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Breadcrumb, Layout, Menu, theme, Button, Dropdown, Avatar } from "antd";
@@ -91,6 +92,24 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
 
   const menuItems: MenuProps['items'] = [
     {
+      key: '1',
+      label: (
+        <button  className="flex items-center gap-2" type="button">
+          <UserOutlined />
+          <span>My Profile</span>
+        </button>
+      ),
+    },
+    {
+      key: '2',
+      label: (
+        <button  className="flex items-center gap-2" type="button">
+          <SettingOutlined />
+          <span>Settings</span>
+        </button>
+      ),
+    },
+    {
       key: '3',
       label: (
         <button onClick={() => logOut()} className="text-red-500 flex items-center gap-2" type="button">
@@ -99,6 +118,8 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
         </button>
       ),
     },
+   
+   
   ];
 
   const user = localStorage?.getItem("user") ? JSON.parse(localStorage.getItem("user") as string) : null;
@@ -113,6 +134,7 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
     <Layout style={{ minHeight: "100vh" }}>
       {/* Fixed Sidebar */}
       <Sider
+      theme="light"
         collapsible
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
@@ -127,7 +149,7 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
         }}
       >
         <div className="demo-logo-vertical" />
-        <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline" items={items} />
+        <Menu theme="light" defaultSelectedKeys={["1"]} mode="inline" items={items} />
       </Sider>
 
       {/* Main Content Layout with Fixed Header */}
@@ -142,18 +164,19 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
             left: collapsed ? 80 : 260,
             right: 0,
             height: 64,
-            background: colorBgContainer,
+            // background: colorBgContainer,
             zIndex: 1000,
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
             padding: "0 16px",
             transition: "left 0.2s",
+            background: "#2A62FF"
           }}
         >
           <Button
             type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            icon={collapsed ? <MenuUnfoldOutlined className="text-white" /> : <MenuFoldOutlined className="text-white" />}
             onClick={() => setCollapsed(!collapsed)}
             style={{
               fontSize: "16px",
@@ -164,8 +187,17 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
           <div className="pr-10">
             <Dropdown menu={{ items: menuItems }} placement="bottomRight">
               <div className="flex items-center gap-2">
-                <Avatar size="large" icon={<UserOutlined />} />
-                <p>{user?.name ?? "Mr.Tom"}</p>
+                {/* <Avatar size="large" icon={<UserOutlined />} /> */}
+                <button>
+                   <Image
+                    src="/user.jpg"
+                    alt="avatar"
+                    width={40}
+                    height={40}
+                    className="rounded-full"
+                  />
+                </button>
+                <p className="text-white">{user?.name ?? "Mr.Tom"}</p>
               </div>
             </Dropdown>
           </div>
