@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import { Button, Card, Input, Typography } from "antd";
 import Link from "next/link";
@@ -24,17 +25,16 @@ const FogotPassword = () => {
     }
   };
   return (
-    <div className="w-[430px]">
-      <Card className="shadow-lg">
-        <p className="mb-5 text-base">
-          Don't worry, we'll send you an email to reset your password.
-        </p>
+    <div className="w-[550px]">
+        <h2 className="font-lexend-deca text-[36px] leading-[54px] font-bold mb-10">Having trouble to sign in?<br/>
+        Reset your password.</h2>
         <Input
           style={{
             marginBottom: 16,
+            height:48
           }}
           size="large"
-          placeholder="Email"
+          placeholder="Enter your email"
           onChange={(e) => {
             setEmail(e.target.value);
             setEmailError("");
@@ -44,16 +44,19 @@ const FogotPassword = () => {
          {emailError && (
           <p className="text-red-500 mb-2">{emailError}</p>
         )}
-        <Button onClick={() => handleResetPassword()} type="primary" size="large" className="w-full">
+        <Button  style={{
+            backgroundColor:"#111111",
+            fontWeight:600,
+            height:48
+          }} onClick={() => handleResetPassword()} type="primary" size="large" className="w-full">
           Reset Password
         </Button>
         <div className="flex justify-between mt-4">
-          <Text>
-            Don't have an account?
-            <Link href="/login"> Log in</Link>
-          </Text>
+          <p>
+            <span className="text-[#484848] text-base font-inter">Don't have an account?</span>
+          <Link className="font-inter text-base font-semibold text-[#333]" href="/login"> Log in</Link>
+          </p>
         </div>
-      </Card>
     </div>
   );
 };

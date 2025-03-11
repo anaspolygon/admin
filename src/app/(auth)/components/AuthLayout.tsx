@@ -1,3 +1,4 @@
+import FogotPassword from "@/app/components/FogotPassword";
 import LoginForm from "@/app/components/LoginForm";
 import Image from "next/image";
 import React, { FC, ReactNode } from "react";
@@ -16,9 +17,9 @@ const AuthLayout: FC<Props> = ({ children }) => {
     // </div>
     <div className="flex items-center  h-screen relative">
       <div className="flex-1 pl-40">
-          <h2 className="font-lexend-deca text-[36px] leading-[54px] font-bold">Welcome back! Please <br/> Sign in to continue.</h2>
-          <p className="font-inter text-sm leading-7 text-[#333] mt-7">By signing up, you will gain access to exclusive content, special offers,<br/> and be the first to hear about exciting news and updates.</p>
-          <LoginForm/>
+          
+          {/* <LoginForm/> */}
+          {children}
       </div>
       <div className="flex-1 bg-[#FAFAFA]">
         <h2 className="font-lexend-deca text-[32px] leading-[48px] font-semibold text-center">The simplest way to <br/>manage your workspace.</h2>

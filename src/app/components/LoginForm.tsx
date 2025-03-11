@@ -64,12 +64,9 @@ const LoginForm = () => {
       }
     }
   };
-
-  console.log(emailError,passwordError);
   
   return (
     <div className="w-[550px] mt-7">
-     
         {/* <Title  style={{fontSize:18,marginBottom:20}}>Login</Title> */}
         <Input className="custom-input" style={{height:48}} onChange={(e) => {
           setEmail(e.target.value); 
@@ -81,7 +78,7 @@ const LoginForm = () => {
           setPasswordError("")
         }} className="mt-4" size="large" placeholder="Password" />
         {passwordError && <p className="text-red-500 mt-2">{passwordError}</p>}
-        <Link className="my-5 block text-[#0070f3] underline transition-colors hover:text-gray-900 hover:no-underline"  href="/forgot-password">
+        <Link className="my-5 block text-[#0070f3] underline transition-colors hover:text-gray-900 hover:no-underline font-semibold"  href="/forgot-password">
             Forgot Password?
           </Link>
         <Button
