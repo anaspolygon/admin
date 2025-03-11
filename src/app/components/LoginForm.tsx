@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { Input, Button, Typography, Card } from "antd";
+import { ArrowRightOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -67,34 +68,39 @@ const LoginForm = () => {
   console.log(emailError,passwordError);
   
   return (
-    <div className="w-[352px] h-[380px]">
-      <Card className="shadow-lg">
-        <Title  style={{fontSize:18,marginBottom:20}}>Login</Title>
-        <Input onChange={(e) => {
+    <div className="w-[550px] mt-7">
+     
+        {/* <Title  style={{fontSize:18,marginBottom:20}}>Login</Title> */}
+        <Input style={{height:48}} onChange={(e) => {
           setEmail(e.target.value); 
           setEmailError("")}
         }  size="large" placeholder="Email" />
         {emailError && <p className="text-red-500 mt-2">{emailError}</p>}
-        <Input.Password onChange={(e) => {
+        <Input.Password style={{height:48}} onChange={(e) => {
           setPassword(e.target.value);
           setPasswordError("")
         }} className="mt-4" size="large" placeholder="Password" />
         {passwordError && <p className="text-red-500 mt-2">{passwordError}</p>}
+        <Link className="my-5 block text-[#0070f3] underline transition-colors hover:text-gray-900 hover:no-underline"  href="/forgot-password">
+            Forgot Password?
+          </Link>
         <Button
           onClick={() => handleLogin()}
           type="primary"
           size="large"
-          className="w-full mt-4"
+          className="w-full"
+          style={{
+            backgroundColor:"#111111",
+            fontWeight:600,
+            height:48
+          }}
         >
-          Log in
+          Log in <ArrowRightOutlined />
         </Button>
-        <div className="flex justify-between mt-2">
+        <div className="flex justify-between">
           {/* <Link href="/signup">Create An Account</Link> */}
-          <Link  href="/forgot-password">
-            Forgot Pwd?
-          </Link>
         </div>
-      </Card>
+      
     </div>
   );
 };
