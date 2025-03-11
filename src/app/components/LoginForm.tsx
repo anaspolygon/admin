@@ -71,7 +71,7 @@ const LoginForm = () => {
     <div className="w-[550px] mt-7">
      
         {/* <Title  style={{fontSize:18,marginBottom:20}}>Login</Title> */}
-        <Input style={{height:48}} onChange={(e) => {
+        <Input className="custom-input" style={{height:48}} onChange={(e) => {
           setEmail(e.target.value); 
           setEmailError("")}
         }  size="large" placeholder="Email" />
