@@ -10,7 +10,7 @@ const Page = () => {
     { id: 2, name: "Manager" },
     { id: 3, name: "Sales" },
   ];
-  const [modal1Open, setModal1Open] = useState(true);
+  const [modal1Open, setModal1Open] = useState(false);
   return (
     <div>
       <h1 className="font-lexend-deca text-2xl font-bold">
