@@ -7,6 +7,7 @@ import {
   PlusOutlined
 } from '@ant-design/icons';
 import AddNewUserModal from "./components/AddNewUserModal";
+import TableComponent from "../components/TableComponent";
 
 const Page = () => {
   const roles = [
@@ -36,10 +37,11 @@ const Page = () => {
       >
         <RoleModal/>
       </Modal>
-      <div className="mt-10">
+      <div className="my-10">
         <Button onClick={()=> setModal2Open(true)} style={{gap:4,height:40}} type="primary"><PlusOutlined  /> <span className="font-semibold" >Add New User</span></Button>
         <AddNewUserModal modal2Open={modal2Open} setModal2Open={setModal2Open} />
       </div>
+      <TableComponent/>
     </div>
   );
 };
