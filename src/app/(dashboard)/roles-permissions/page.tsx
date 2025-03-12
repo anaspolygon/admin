@@ -1,8 +1,12 @@
 "use client"
 import { useState } from "react";
 import RoleCard from "./components/RoleCard";
-import { Modal } from "antd";
+import { Button, Modal } from "antd";
 import RoleModal from "./components/RoleModal";
+import {
+  PlusOutlined
+} from '@ant-design/icons';
+import AddNewUserModal from "./components/AddNewUserModal";
 
 const Page = () => {
   const roles = [
@@ -11,6 +15,7 @@ const Page = () => {
     { id: 3, name: "Sales" },
   ];
   const [modal1Open, setModal1Open] = useState(false);
+  const [modal2Open, setModal2Open] = useState(false);
   return (
     <div>
       <h1 className="font-lexend-deca text-2xl font-bold">
@@ -31,6 +36,10 @@ const Page = () => {
       >
         <RoleModal/>
       </Modal>
+      <div className="mt-10">
+        <Button onClick={()=> setModal2Open(true)} style={{gap:4,height:40}} type="primary"><PlusOutlined  /> <span className="font-semibold" >Add New User</span></Button>
+        <AddNewUserModal modal2Open={modal2Open} setModal2Open={setModal2Open} />
+      </div>
     </div>
   );
 };
