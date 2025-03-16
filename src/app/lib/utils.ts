@@ -14,19 +14,21 @@ export function isValidEmail(email: string) {
 
 // utils/sendEmail.ts
 
-export async function sendEmail(to: string, subject: string, text: string) {
+export async function sendEmail(to: string, subject: string, text: string,html:string) {
   const transporter = nodemailer.createTransport({
-    service: "Gmail",
+    host: "sandbox.smtp.mailtrap.io",
+    port: 2525,
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
+      user: "15b2f56cf24a07",
+      pass: "19672c0386343e"
+    }
   });
 
   await transporter.sendMail({
-    from: process.env.EMAIL_USER,
+    from: process.env.EMAIL_USER || "al.anas@polygontech.xyz",
     to,
     subject,
     text,
+    html
   });
 }

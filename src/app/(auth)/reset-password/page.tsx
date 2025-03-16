@@ -1,10 +1,12 @@
 // pages/reset-password.tsx
+"use client"
 import { useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function ResetPassword() {
   const router = useRouter();
-  const { token } = router.query;
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token");
 
   const [newPassword, setNewPassword] = useState("");
   const [message, setMessage] = useState("");

@@ -27,6 +27,9 @@ const FogotPassword = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
+
+      console.log("hello");
+      
   
       const data = await res.json();
       setMessage(data.message);
