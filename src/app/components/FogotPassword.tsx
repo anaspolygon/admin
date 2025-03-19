@@ -8,12 +8,13 @@ const { Text } = Typography;
 const FogotPassword = () => {
    const [email, setEmail] = useState("");
    const [emailError,setEmailError] = useState("");
+   const [message, setMessage] = useState("");
 
    const validateEmail = (email: string) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
-   const handleResetPassword = () => {
+   const handleResetPassword = async() => {
     if (!email) {
       setEmailError("Email is required");
     }
@@ -21,9 +22,22 @@ const FogotPassword = () => {
       setEmailError("Invalid email format");
     }
     if (email) {
-      // Call login API
+      const res = await fetch("/api/auth/request-reset", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      console.log("hello");
+      
+  
+      const data = await res.json();
+      setMessage(data.message);
     }
   };
+
+
+
   return (
     <div className="w-[550px]">
         <h2 className="font-lexend-deca text-[36px] leading-[54px] font-bold mb-10">Having trouble to sign in?<br/>

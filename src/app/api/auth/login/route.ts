@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
     const userRepository = dataSource.getRepository(User);
 
     // Find user by email
-    const user = await userRepository.findOne({ where: { email } });
+    const user = await userRepository.findOne({ where: { email } ,select: ["name", "email"]  });
     if (!user) {
       return NextResponse.json(
         { error: "Invalid email or password" },

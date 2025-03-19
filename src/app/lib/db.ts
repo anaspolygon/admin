@@ -10,7 +10,7 @@ export async function getDataSource() {
     dataSource = new DataSource({
       type: "mysql", // You can change this to postgres, sqlite, etc.
       host: process.env.DB_HOST || "localhost",
-      port: Number.parseInt(process.env.DB_PORT || "3306"),
+      port: Number.parseInt(process.env.DB_PORT || "3307"),
       username: process.env.DB_USERNAME || "root",
       password: process.env.DB_PASSWORD || "",
       database: process.env.DB_NAME || "auth_db",

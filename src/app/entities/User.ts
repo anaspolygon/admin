@@ -19,5 +19,11 @@ export class User {
 
   @UpdateDateColumn()
   updatedAt!: Date
+
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  resetToken!: string | null
+
+  @Column({ type: "timestamp", nullable: true })
+  resetTokenExpiry!: Date | null
 }
 
