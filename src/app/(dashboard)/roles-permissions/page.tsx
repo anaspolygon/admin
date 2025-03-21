@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react";
 import RoleCard from "./components/RoleCard";
-import { Button, Modal, Select,Input,Space  } from "antd";
+import { Button, Modal, Select, Input, Space } from "antd";
 import RoleModal from "./components/RoleModal";
 import {
   PlusOutlined,
@@ -10,16 +10,31 @@ import {
 import AddNewUserModal from "./components/AddNewUserModal";
 import TableComponent from "../components/TableComponent";
 import { roleOptions, roles, statusOptions } from "./data";
+import AddButton from "../components/AddButton";
+import AddNewRoleModal from "./components/AddNewRoleModal";
+
 
 const Page = () => {
 
   const [modal1Open, setModal1Open] = useState(false);
   const [modal2Open, setModal2Open] = useState(false);
+  const [modal3Open, setModal3Open] = useState(false);
+  const handleAddUserModal = () => {
+    setModal2Open(true)
+  }
+
+  const handleAddRoleModal = () => {
+    setModal3Open(true)
+  }
+
   return (
     <div>
-      <h1 className="font-lexend-deca text-2xl font-bold">
-        Roles & Permissions
-      </h1>
+      <div className="flex items-center justify-between">
+        <h1 className="font-lexend-deca text-2xl font-bold">
+          Roles & Permissions
+        </h1>
+        <AddButton name="Add New Role" handleAddButton={handleAddRoleModal} />
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
         {roles.map((role) => (
           <RoleCard key={role.id} role={role} setModal1Open={setModal1Open} />
@@ -55,13 +70,14 @@ const Page = () => {
         </div>
         <div className="flex items-center gap-4">
           <Space.Compact size="large">
-          <Input size="large" placeholder="Search for users..." prefix={<SearchOutlined />} />
+            <Input size="large" placeholder="Search for users..." prefix={<SearchOutlined />} />
           </Space.Compact>
-          <Button onClick={() => setModal2Open(true)} style={{ gap: 4, height: 40 }} type="primary"><PlusOutlined /> <span className="font-semibold" >Add New User</span></Button>
+          <AddButton name="Add New User" handleAddButton={handleAddUserModal} />
         </div>
       </div>
       <TableComponent />
       <AddNewUserModal modal2Open={modal2Open} setModal2Open={setModal2Open} />
+      <AddNewRoleModal modal3Open={modal3Open} setModal3Open={setModal3Open} />
     </div>
   );
 };
