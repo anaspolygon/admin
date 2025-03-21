@@ -1,4 +1,5 @@
 import { Input, Modal, Select } from "antd";
+import { permissionsOptions, roleOptions, statusOptions } from "../data";
 
 interface AddNewUserModalProps {
   modal2Open: boolean;
@@ -31,23 +32,18 @@ const AddNewUserModal = ({
         <h2 className="font-inter text-sm text-[#484848] font-semibold mb-1.5">
           Email
         </h2>
-        <Input style={{height:40}} size="large" placeholder="Enter user's Email Address" />
+        <Input style={{height:40}} size="large" placeholder="Enter User's Email Address" />
       </div>
       <div className="mb-6">
         <h2 className="font-inter text-sm text-[#484848] font-semibold mb-1.5">
           Role
         </h2>
         <Select
-          defaultValue="Role"
+          defaultValue="Select"
           onChange={handleChange}
           className="w-full"
           style={{height:40}}
-          options={[
-            { value: "jack", label: "Jack" },
-            { value: "lucy", label: "Lucy" },
-            { value: "Yiminghe", label: "yiminghe" },
-            { value: "disabled", label: "Disabled", disabled: true },
-          ]}
+          options={ roleOptions}
         />
       </div>
       <div className="mb-6">
@@ -55,16 +51,23 @@ const AddNewUserModal = ({
           Status
         </h2>
         <Select
-          defaultValue="Role"
+          defaultValue="Select"
           onChange={handleChange}
           className="w-full"
           style={{height:40}}
-          options={[
-            { value: "jack", label: "Jack" },
-            { value: "lucy", label: "Lucy" },
-            { value: "Yiminghe", label: "yiminghe" },
-            { value: "disabled", label: "Disabled", disabled: true },
-          ]}
+          options={statusOptions}
+        />
+      </div>
+      <div className="mb-6">
+        <h2 className="font-inter text-sm text-[#484848] font-semibold mb-1.5">
+          Permissions
+        </h2>
+        <Select
+          defaultValue="Select"
+          onChange={handleChange}
+          className="w-full"
+          style={{height:40}}
+          options={permissionsOptions}
         />
       </div>
     </Modal>
