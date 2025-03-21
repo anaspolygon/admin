@@ -1,5 +1,5 @@
 "use client";
-import { Input, Select } from 'antd';
+import { Input, Select,Divider  } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import { categoryOptions, productTypeOptions } from './data';
 const { TextArea } = Input;
@@ -63,8 +63,9 @@ const page = () => {
                     </div>
                 </div>
             </div>
+            <Divider style={{borderColor:"#e3e3e3"}} dashed />
         </div>
     );
 };
-
+ 
 export default page;
