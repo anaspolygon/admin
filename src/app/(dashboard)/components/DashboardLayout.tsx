@@ -57,10 +57,10 @@ function getItem(
 
 const items: MenuItem[] = [
   // Users Menu
-  getMenu("Users", "sub1", <UserOutlined />, [
-    getItem("User", "3", "/user"),
-    getItem("Role", "4", "/role"),
-  ]),
+  // getMenu("Users", "sub1", <UserOutlined />, [
+  //   getItem("User", "3", "/user"),
+  //   getItem("Role", "4", "/role"),
+  // ]),
 
   // Ecommerce Menu
   getMenu("Ecommerce", "sub2", <ShoppingOutlined />, [
@@ -81,10 +81,11 @@ const items: MenuItem[] = [
   ]),
 
   // Roles & Permissions Menu
-  getMenu("Roles & Permissions", "sub5", <SettingOutlined />, [
-    getItem("Roles", "12", "/roles-permissions"),
-    getItem("Permissions", "13", "/roles-permissions"),
-  ]),
+  // getMenu("Roles & Permissions", "sub5", <SettingOutlined />, [
+  //   getItem("Roles", "12", "/roles-permissions"),
+  //   getItem("Permissions", "13", "/roles-permissions"),
+  // ]),
+  getMenu("Roles & Permissions", "sub5", <SettingOutlined />),
 ];
 
 interface Props {
