@@ -253,10 +253,10 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
           }}
         >
           {/* Updated Breadcrumb with `items` prop */}
-          <Breadcrumb
+          {/* <Breadcrumb
             items={breadcrumbItems}
             style={{ marginBottom: "16px" }}
-          />
+          /> */}
 
           {children}
         </Content>

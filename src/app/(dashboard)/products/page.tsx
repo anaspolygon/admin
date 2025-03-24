@@ -5,6 +5,7 @@ import { Input, Button, Drawer, DatePicker, Select, Space, Tag } from "antd";
 import type { DatePickerProps } from "antd";
 import TableComponent from "../components/TableComponent";
 import { data, UserData } from "./data";
+import AddButton from "../components/AddButton";
 
 const page = () => {
   const [open, setOpen] = useState(false);
@@ -76,8 +77,16 @@ const page = () => {
     // Handle delete logic here
   };
 
+  const handleAddButton = () => {
+
+  }
+
   return (
     <>
+      <div className="flex  justify-between mb-8">
+        <h2 className="font-lexend-deca text-2xl font-bold">Products Table</h2>
+        <AddButton name="Add Product" handleAddButton={handleAddButton} />
+      </div>
       <div className="flex items-center justify-between mb-4">
         <Input
           size="large"
