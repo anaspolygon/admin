@@ -1,10 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import { SearchOutlined, FilterOutlined } from "@ant-design/icons";
-import { Input, Button, Drawer, DatePicker, Select, Segmented } from "antd";
+import { SearchOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { Input, Button, Drawer, DatePicker, Select, Space, Tag } from "antd";
 import type { DatePickerProps } from "antd";
-
 import TableComponent from "../components/TableComponent";
+import { data, UserData } from "./data";
 
 const page = () => {
   const [open, setOpen] = useState(false);
@@ -24,8 +24,60 @@ const page = () => {
   const handleChange = (value: string) => {
     console.log(`selected ${value}`);
   };
+  const columns = [
+    { title: "User ID", dataIndex: "userId", key: "userId" },
+    { title: "Name", dataIndex: "name", key: "name" },
+    { title: "Role", dataIndex: "role", key: "role" },
+    { title: "Created", dataIndex: "created", key: "created" },
+    { title: "Permissions", dataIndex: "permissions", key: "permissions" },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      render: (status: string) => {
+        let color;
+        if (status === "Active") {
+          color = "green";
+        } else if (status === "Pending") {
+          color = "orange";
+        } else if (status === "Deactive") {
+          color = "volcano";
+        }
+        return <Tag color={color}>{status}</Tag>;
+      },
+    },
+    {
+      title: "Action",
+      key: "action",
+      render: (_: any, record: UserData) => (
+        <Space size="middle">
+          <Button
+            type="link"
+            icon={<EditOutlined />}
+            onClick={() => handleEdit(record)}
+          />
+          <Button
+            type="link"
+            danger
+            icon={<DeleteOutlined />}
+            onClick={() => handleDelete(record)}
+          />
+        </Space>
+      ),
+    },
+  ];
+  const handleEdit = (record: UserData) => {
+    console.log("Edit clicked for", record);
+    // Handle edit logic here
+  };
+
+  const handleDelete = (record: UserData) => {
+    console.log("Delete clicked for", record);
+    // Handle delete logic here
+  };
+
   return (
-    <div>
+    <>
       <div className="flex items-center justify-between mb-4">
         <Input
           size="large"
@@ -33,9 +85,9 @@ const page = () => {
           placeholder="Search by product name..."
           prefix={<SearchOutlined />}
         />
-        <Button icon={<FilterOutlined />} size="large" onClick={showDrawer}>
+        {/* <Button icon={<FilterOutlined />} size="large" onClick={showDrawer}>
           Filters
-        </Button>
+        </Button> */}
         <Drawer title="Table Filters" onClose={onClose} open={open}>
           <div className="h-full flex flex-col justify-between">
             <div>
@@ -62,8 +114,11 @@ const page = () => {
           </div>
         </Drawer>
       </div>
-      <TableComponent />
-    </div>
+      <TableComponent columns={columns}
+        data={data}
+        onEdit={handleEdit}
+        onDelete={handleDelete} />
+    </>
   );
 };
 
