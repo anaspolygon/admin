@@ -6,7 +6,10 @@ import type { TableColumnsType } from "antd";
 import TableComponent from "../components/TableComponent";
 import { Category, data } from "./data";
 import AddButton from "../components/AddButton";
+import { useRouter } from "next/navigation";
 const page = () => {
+
+  const router = useRouter()
 
   const columns: TableColumnsType<Category> = [
     { title: "Category Name", dataIndex: "name", key: "name" },
@@ -21,7 +24,7 @@ const page = () => {
           <Button
             type="link"
             icon={<EditOutlined />}
-            onClick={() => handleEdit(record)}
+            onClick={() => router.push(`/create-category?edit=true`)}
           />
           <Button
             type="link"
@@ -44,15 +47,17 @@ const page = () => {
     // Handle the delete logic here
   };
 
-  const handleAddButton = () => {
+  
 
+  const handleAddButton = () => {
+    router.push("/create-category")
   }
 
   return (
     <>
       <div className="flex  justify-between mb-8">
         <h2 className="font-lexend-deca text-2xl font-bold">Categories Table</h2>
-        <AddButton name="Add Product" handleAddButton={handleAddButton} />
+        <AddButton name="Add Category" handleAddButton={handleAddButton} />
       </div>
       <div className="flex items-center justify-between mb-4">
         <Input

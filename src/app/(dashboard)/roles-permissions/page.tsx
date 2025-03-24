@@ -1,15 +1,17 @@
 "use client"
 import { useState } from "react";
 import RoleCard from "./components/RoleCard";
-import { Button, Modal, Select, Input, Space } from "antd";
+import { Button, Modal, Select, Input, Space, Tag } from "antd";
 import RoleModal from "./components/RoleModal";
 import {
+  DeleteOutlined,
+  EditOutlined,
   PlusOutlined,
   SearchOutlined
 } from '@ant-design/icons';
 import AddNewUserModal from "./components/AddNewUserModal";
 import TableComponent from "../components/TableComponent";
-import { roleOptions, roles, statusOptions } from "./data";
+import { data, roleOptions, roles, statusOptions, UserData } from "./data";
 import AddButton from "../components/AddButton";
 import AddNewRoleModal from "./components/AddNewRoleModal";
 
@@ -26,6 +28,59 @@ const Page = () => {
   const handleAddRoleModal = () => {
     setModal3Open(true)
   }
+
+  const columns = [
+    { title: "User ID", dataIndex: "userId", key: "userId" },
+    { title: "Name", dataIndex: "name", key: "name" },
+    { title: "Role", dataIndex: "role", key: "role" },
+    { title: "Created", dataIndex: "created", key: "created" },
+    { title: "Permissions", dataIndex: "permissions", key: "permissions" },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      render: (status: string) => {
+        let color;
+        if (status === "Active") {
+          color = "green";
+        } else if (status === "Pending") {
+          color = "orange";
+        } else if (status === "Deactive") {
+          color = "volcano";
+        }
+        return <Tag color={color}>{status}</Tag>;
+      },
+    },
+    {
+      title: "Action",
+      key: "action",
+      render: (_: any, record: UserData) => (
+        <Space size="middle">
+          <Button
+            type="link"
+            icon={<EditOutlined />}
+            onClick={() => handleEdit(record)}
+          />
+          <Button
+            type="link"
+            danger
+            icon={<DeleteOutlined />}
+            onClick={() => handleDelete(record)}
+          />
+        </Space>
+      ),
+    },
+  ];
+
+  const handleEdit = (record: UserData) => {
+    console.log("Edit clicked for", record);
+    // Handle edit logic here
+  };
+
+  const handleDelete = (record: UserData) => {
+    console.log("Delete clicked for", record);
+    // Handle delete logic here
+  };
 
   return (
     <div>
@@ -75,7 +130,10 @@ const Page = () => {
           <AddButton name="Add New User" handleAddButton={handleAddUserModal} />
         </div>
       </div>
-      <TableComponent />
+      <TableComponent  columns={columns}
+      data={data}
+      onEdit={handleEdit}
+      onDelete={handleDelete}  />
       <AddNewUserModal modal2Open={modal2Open} setModal2Open={setModal2Open} />
       <AddNewRoleModal modal3Open={modal3Open} setModal3Open={setModal3Open} />
     </div>

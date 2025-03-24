@@ -6,6 +6,7 @@ import type { DatePickerProps } from "antd";
 import TableComponent from "../components/TableComponent";
 import { data, UserData } from "./data";
 import AddButton from "../components/AddButton";
+import { useRouter } from "next/navigation";
 
 const page = () => {
   const [open, setOpen] = useState(false);
@@ -55,7 +56,7 @@ const page = () => {
           <Button
             type="link"
             icon={<EditOutlined />}
-            onClick={() => handleEdit(record)}
+            onClick={() => router.push(`/create-product?edit=true`)}
           />
           <Button
             type="link"
@@ -77,8 +78,10 @@ const page = () => {
     // Handle delete logic here
   };
 
-  const handleAddButton = () => {
+  const router = useRouter()
 
+  const handleAddButton = () => {
+       router.push("/create-product")
   }
 
   return (

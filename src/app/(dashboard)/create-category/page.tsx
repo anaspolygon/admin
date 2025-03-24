@@ -4,6 +4,8 @@ import type { RadioChangeEvent } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import FileUpload from '../create-product/components/FileUpload';
 import { categoryOptions, productTypeOptions } from '../create-product/data';
+import { useSearchParams } from 'next/navigation'
+import { escapeId } from 'mysql2';
 
 const { TextArea } = Input;
 
@@ -17,6 +19,9 @@ const style: React.CSSProperties = {
 
 const page = () => {
     const [value, setValue] = useState('');
+    const searchParams = useSearchParams()
+
+    const edit = searchParams.get('edit')
 
     const handleChange = (value: string) => {
         console.log(`selected ${value}`);
@@ -37,7 +42,9 @@ const page = () => {
     return (
         <div>
             <h1 className="font-lexend-deca text-2xl font-bold">
-                Create A Category
+                {
+                    edit ? 'Edit Category' : 'Create A Category'
+                }
             </h1>
             <div className="flex  gap-7">
                 <div className='w-[500px]'>
@@ -96,7 +103,9 @@ const page = () => {
             <Divider style={{ borderColor: "#e3e3e3" }} dashed />
             <div className='flex gap-4 items-center justify-end'>
                 <Button style={{ height: 48 }}>Save as Draft</Button>
-                <Button style={{ height: 48 }} type="primary">Create Category</Button>
+                <Button style={{ height: 48 }} type="primary">  {
+                    edit ? 'Edit Category' : 'Create A Category'
+                }</Button>
             </div>
         </div>
     );

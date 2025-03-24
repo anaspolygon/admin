@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { categoryOptions, productTypeOptions } from './data';
 import FileUpload from './components/FileUpload';
 const { TextArea } = Input;
-
+import { useSearchParams } from 'next/navigation'
 
 const style: React.CSSProperties = {
     display: 'flex',
@@ -16,6 +16,12 @@ const style: React.CSSProperties = {
 
 const page = () => {
     const [value, setValue] = useState('');
+
+    const searchParams = useSearchParams()
+
+    const edit = searchParams.get('edit')
+
+
 
     const handleChange = (value: string) => {
         console.log(`selected ${value}`);
@@ -36,7 +42,10 @@ const page = () => {
     return (
         <div>
             <h1 className="font-lexend-deca text-2xl font-bold">
-                Create Product
+                {
+                    edit ? 'Edit Product' : 'Create Product'
+                }
+
             </h1>
             <div className="flex  gap-7">
                 <div className='w-[500px]'>
@@ -216,8 +225,11 @@ const page = () => {
             </div>
             <Divider style={{ borderColor: "#e3e3e3" }} dashed />
             <div className='flex gap-4 items-center justify-end'>
-                <Button style={{height:48}}>Save as Draft</Button>
-                <Button style={{height:48}} type="primary">Create Product</Button>
+                <Button style={{ height: 48 }}>Save as Draft</Button>
+                <Button style={{ height: 48 }} type="primary"> {
+                    edit ? 'Edit Product' : 'Create Product'
+                }
+                </Button>
             </div>
         </div>
     );
