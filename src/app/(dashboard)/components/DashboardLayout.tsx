@@ -6,7 +6,7 @@ import {
   MenuUnfoldOutlined,
   ShoppingOutlined,
   LoginOutlined,
-  SettingOutlined,
+  SettingOutlined, AppstoreAddOutlined
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import {
@@ -56,13 +56,34 @@ function getItem(
 }
 
 const items: MenuItem[] = [
+  // Users Menu
   getMenu("Users", "sub1", <UserOutlined />, [
     getItem("User", "3", "/user"),
     getItem("Role", "4", "/role"),
   ]),
+
+  // Ecommerce Menu
   getMenu("Ecommerce", "sub2", <ShoppingOutlined />, [
     getItem("Products", "6", "/products"),
-    getItem("Add Product", "7", "/add-product"),
+    getItem("Add Product", "7", "/create-product"),
+  ]),
+
+  // Products Menu
+  getMenu("Products", "sub3", <AppstoreAddOutlined />, [
+    getItem("Products List", "8", "/products"),
+    getItem("Create Product", "9", "/create-product"),
+  ]),
+
+  // Categories Menu
+  getMenu("Categories", "sub4", <AppstoreAddOutlined />, [
+    getItem("Categories List", "10", "/categories"),
+    getItem("Create Category", "11", "/create-category"),
+  ]),
+
+  // Roles & Permissions Menu
+  getMenu("Roles & Permissions", "sub5", <SettingOutlined />, [
+    getItem("Roles", "12", "/roles-permissions"),
+    getItem("Permissions", "13", "/roles-permissions"),
   ]),
 ];
 
