@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Button, Card, Input, Typography } from "antd";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const { Text } = Typography;
 
@@ -14,7 +15,11 @@ const FogotPassword = () => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
+  const router = useRouter();
+
    const handleResetPassword = async() => {
+    router.push("/reset-password");
+    return;
     if (!email) {
       setEmailError("Email is required");
     }
