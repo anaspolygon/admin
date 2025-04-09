@@ -24,8 +24,8 @@ const LoginForm = () => {
   
 
   const handleLogin =async () => {
-    router.push("/roles-permissions");
-    return;
+    // router.push("/roles-permissions");
+    // return;
     if (!email) {
       setEmailError("Email is required");
     }
