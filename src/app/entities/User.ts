@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToOne, JoinColumn } from "typeorm"
+import { Role } from "./Role"
 
 @Entity()
 export class User {
@@ -25,5 +26,9 @@ export class User {
 
   @Column({ type: "timestamp", nullable: true })
   resetTokenExpiry!: Date | null
+  @OneToOne(()=>Role)
+  @JoinColumn()
+  role!: Role
+
 }
 
