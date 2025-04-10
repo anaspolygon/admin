@@ -2,6 +2,7 @@ import "reflect-metadata";
 import { DataSource } from "typeorm";
 import { User } from "@/app/entities/User";
 import { Permission } from "../entities/Permission";
+import { Role } from "../entities/Role";
 
 // Create a singleton DataSource instance
 let dataSource: DataSource;
@@ -15,7 +16,7 @@ export async function getDataSource() {
       username: process.env.DB_USERNAME || "root",
       password: process.env.DB_PASSWORD || "",
       database: process.env.DB_NAME || "auth_db",
-      entities: [User,Permission],
+      entities: [User,Permission,Role],
       synchronize: true,
       // synchronize: process.env.NODE_ENV !== "production", 
       logging: process.env.NODE_ENV !== "production",
