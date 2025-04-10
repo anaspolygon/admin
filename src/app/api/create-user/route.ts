@@ -35,7 +35,7 @@ export async function GET(){
     try {
         const dataSource = await getDataSource();
         const userRepository = dataSource.getRepository(User);
-        const users = await userRepository.find({ where:{id:"1"} });
+        const users = await userRepository.find({ where:{email:"majib@gmail.com"} ,select: ["name", "email"] ,relations: ["role"]});
         return NextResponse.json(users, { status: 200 });
     } catch (error) {
         console.error("Error fetching users:", error);
