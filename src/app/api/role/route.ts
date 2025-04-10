@@ -17,9 +17,6 @@ export async function POST(request: Request) {
       id: In(permissionIds),
     });
 
-    console.log("=======================================",permissions);
-  
-
     if (!exists) {
       const role = roleRepository.create({ name,permissions });
       await roleRepository.save(role);
