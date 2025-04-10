@@ -37,3 +37,17 @@ export async function POST(request:NextRequest) {
     return NextResponse.json({ error: 'Something went wrong' }, { status: 500 });
    }
 }
+
+
+export async function GET(request:NextRequest) {
+    try {
+     const dataSource = await getDataSource();
+     const permissionRepository = dataSource.getRepository(Permission);
+     const permissions = await permissionRepository.find({ relations: ["roles"] });
+     await dataSource.destroy();
+     return NextResponse.json(permissions, { status: 200 });
+    } catch (error) {
+     console.error('Permission fetch error:', error);
+     return NextResponse.json({ error: 'Something went wrong' }, { status: 500 });
+    }
+}
