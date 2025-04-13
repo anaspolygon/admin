@@ -33,6 +33,8 @@ const AddNewRoleModal = ({
   );
 
   const [permissionIds, setPermissionIds] = useState<number[]>([]);
+  const [name, setName] = useState<string>("");
+  const [loading, setLoading] = useState(false);
 
   const addPermission = (permission: any) => {
     if (permissionIds.includes(permission.id)) {
@@ -42,6 +44,30 @@ const AddNewRoleModal = ({
     }
   };
 
+  const createRole = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/role", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name,permissionIds }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+      } else {
+        console.log(data);
+        setLoading(false);
+      }
+
+    } catch (error) {
+      setLoading(false);
+    }
+  };
+
+  console.log(name);
+
   return (
     <Modal
       title="Add a new Role"
@@ -49,7 +75,7 @@ const AddNewRoleModal = ({
       centered
       open={modal3Open}
       okText="Create"
-      onOk={() => setModal3Open(false)}
+      onOk={() => createRole()}
       onCancel={() => setModal3Open(false)}
     >
       <div className="mb-6">
@@ -60,6 +86,7 @@ const AddNewRoleModal = ({
           style={{ height: 40 }}
           size="large"
           placeholder="Enter role name"
+          onChange={(e) => setName(e.target.value)}
         />
       </div>
 
