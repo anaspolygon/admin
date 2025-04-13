@@ -1,5 +1,5 @@
-"use client"
-import { useState } from "react";
+"use client";
+import { useEffect, useState } from "react";
 import RoleCard from "./components/RoleCard";
 import { Button, Modal, Select, Input, Space, Tag } from "antd";
 import RoleModal from "./components/RoleModal";
@@ -7,27 +7,25 @@ import {
   DeleteOutlined,
   EditOutlined,
   PlusOutlined,
-  SearchOutlined
-} from '@ant-design/icons';
+  SearchOutlined,
+} from "@ant-design/icons";
 import AddNewUserModal from "./components/AddNewUserModal";
 import TableComponent from "../components/TableComponent";
 import { data, roleOptions, roles, statusOptions, UserData } from "./data";
 import AddButton from "../components/AddButton";
 import AddNewRoleModal from "./components/AddNewRoleModal";
 
-
 const Page = () => {
-
   const [modal1Open, setModal1Open] = useState(false);
   const [modal2Open, setModal2Open] = useState(false);
   const [modal3Open, setModal3Open] = useState(false);
   const handleAddUserModal = () => {
-    setModal2Open(true)
-  }
+    setModal2Open(true);
+  };
 
   const handleAddRoleModal = () => {
-    setModal3Open(true)
-  }
+    setModal3Open(true);
+  };
 
   const columns = [
     { title: "User ID", dataIndex: "userId", key: "userId" },
@@ -82,6 +80,27 @@ const Page = () => {
     // Handle delete logic here
   };
 
+  const [permissions, setPermissions] = useState([]);
+
+  useEffect(() => {
+    const fetchPermissions = async () => {
+      try {
+        const response = await fetch("/api/permission");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setPermissions(data);
+      } catch (error) {
+        console.error("Error fetching permissions:", error);
+      }
+    };
+
+    fetchPermissions();
+  }, []);
+
+  console.log("permissions", permissions);
+
   return (
     <div>
       <div className="flex items-center justify-between">
@@ -107,17 +126,19 @@ const Page = () => {
       </Modal>
       <div className="my-10 flex items-center justify-between">
         <div className="flex items-center">
-          <h2 className="font-lexend-deca text-lg font-semibold mr-4">All Users</h2>
+          <h2 className="font-lexend-deca text-lg font-semibold mr-4">
+            All Users
+          </h2>
           <Select
             defaultValue="Filter by Status"
-            onChange={() => { }}
+            onChange={() => {}}
             className="w-[160px] h-9"
             style={{ height: 40, marginRight: 10 }}
             options={statusOptions}
           />
           <Select
             defaultValue="Filter by Role"
-            onChange={() => { }}
+            onChange={() => {}}
             className="w-[160px] h-9"
             style={{ height: 40 }}
             options={roleOptions}
@@ -125,17 +146,29 @@ const Page = () => {
         </div>
         <div className="flex items-center gap-4">
           <Space.Compact size="large">
-            <Input size="large" placeholder="Search for users..." prefix={<SearchOutlined />} />
+            <Input
+              size="large"
+              placeholder="Search for users..."
+              prefix={<SearchOutlined />}
+            />
           </Space.Compact>
           <AddButton name="Add New User" handleAddButton={handleAddUserModal} />
         </div>
       </div>
-      <TableComponent  columns={columns}
-      data={data}
-      onEdit={handleEdit}
-      onDelete={handleDelete}  />
+      <TableComponent
+        columns={columns}
+        data={data}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+      />
       <AddNewUserModal modal2Open={modal2Open} setModal2Open={setModal2Open} />
-      <AddNewRoleModal modal3Open={modal3Open} setModal3Open={setModal3Open} />
+      {permissions && permissions.length > 0 && (
+        <AddNewRoleModal
+          modal3Open={modal3Open}
+          setModal3Open={setModal3Open}
+          permissions={permissions}
+        />
+      )}
     </div>
   );
 };
