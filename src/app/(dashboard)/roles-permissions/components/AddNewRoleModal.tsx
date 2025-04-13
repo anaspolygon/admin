@@ -61,6 +61,9 @@ const AddNewRoleModal = ({
       if (res.ok) {
         setLoading(false);
         notify();
+        setName("");
+        setPermissionIds([]);
+        setColorHex("#1677ff");
         setModal3Open(false);
       } else {
         console.log(data);
